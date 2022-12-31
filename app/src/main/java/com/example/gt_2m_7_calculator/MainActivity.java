@@ -3,6 +3,8 @@ package com.example.gt_2m_7_calculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
@@ -16,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static TextView text_output;
     private static TextView result;
-    private static ArrayList<Long> numbers;
+    private static ArrayList<BigInteger> numbers;
     private static ArrayList<String> operations;
     private static Boolean isFull;
     private static Boolean isNewNumber;
@@ -54,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public static String calculate(ArrayList<Long> numbers, ArrayList<String> operators) {
+    public static String calculate(ArrayList<BigInteger> numbers, ArrayList<String> operators) {
         // Создаем стек для хранения чисел
-        Stack<Long> stack = new Stack<>();
+        Stack<BigInteger> stack = new Stack<>();
         // Создаем стек для хранения операторов
         Stack<String> operatorStack = new Stack<>();
 
         // Инициализируем итераторы для списков чисел и операторов
-        Iterator<Long> numberIter = numbers.iterator();
+        Iterator<BigInteger> numberIter = numbers.iterator();
         Iterator<String> operatorIter = operators.iterator();
 
         // Перебираем числа и операторы
@@ -75,20 +77,20 @@ public class MainActivity extends AppCompatActivity {
                 // оператора на вершине стека, берем два последних числа из стека, выполняем операцию и помещаем
                 // результат обратно в стек
                 while (!operatorStack.isEmpty() && getOperatorPriority(token) <= getOperatorPriority(operatorStack.peek())) {
-                    Long num2 = stack.pop();
-                    Long num1 = stack.pop();
+                    BigInteger num2 = stack.pop();
+                    BigInteger num1 = stack.pop();
                     String operator = operatorStack.pop();
                     if (operator.equals("+")) {
-                        stack.push(num1 + num2);
+                        stack.push(num1.add(num2));
                     } else if (operator.equals("-")) {
-                        stack.push(num1 - num2);
+                        stack.push(num1.subtract(num2));
                     } else if (operator.equals("×")) {
-                        stack.push(num1 * num2);
+                        stack.push(num1.multiply(num2));
                     } else if (operator.equals("÷")) {
-                        if(num2 == 0){
+                        if(num2.intValue() == 0){
                             return "Деление на 0";
                         }
-                        stack.push(num1 / num2);
+                        stack.push(num1.divide(num2));
                     }
                 }
 
@@ -99,20 +101,20 @@ public class MainActivity extends AppCompatActivity {
         }
         // После окончания цикла в стеке операторов могут остаться необработанные операторы
         while (!operatorStack.isEmpty()) {
-            Long num2 = stack.pop();
-            Long num1 = stack.pop();
+            BigInteger num2 = stack.pop();
+            BigInteger num1 = stack.pop();
             String operator = operatorStack.pop();
             if (operator.equals("+")) {
-                stack.push(num1 + num2);
+                stack.push(num1.add(num2));
             } else if (operator.equals("-")) {
-                stack.push(num1 - num2);
+                stack.push(num1.subtract(num2));
             } else if (operator.equals("×")) {
-                stack.push(num1 * num2);
+                stack.push(num1.multiply(num2));
             } else if (operator.equals("÷")) {
-                if(num2 == 0){
+                if(num2.intValue() == 0){
                     return "Деление на 0";
                 }
-                stack.push(num1 / num2);
+                stack.push(num1.divide(num2));
             }
         }
 
@@ -136,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("niko", String.valueOf(answer));
             if (answer.toString().length() > 9) {
                 String str = answer.toString();
-                String ans = str.charAt(0) + ", " + str.substring(1, 7);
+                Double ans = Double.parseDouble(str.charAt(0) + "." + str.substring(1, 7));
 
                 return ("= " + ans + "e" + (answer.toString().length() - 1));
             } else {
@@ -160,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 if (count(text, "\n") > 0) {
                     if (text.substring(text.lastIndexOf("\n")).length() + numbers.get(j).toString().length() > 15) {
                         text += "\n";
-                        if (count(text, "\n") == 6) {
+                        if (count(text, "\n") == 5) {
                             isFull = true;
                             break;
                         }
@@ -168,13 +170,13 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     if (numbers.get(j - 1).toString().length() + numbers.get(j).toString().length() > 15) {
                         text += "\n";
-                        if (count(text, "\n") == 6) {
+                        if (count(text, "\n") == 5) {
                             isFull = true;
                             break;
                         }
                     } else if (text.length() + numbers.get(j).toString().length() > 15) {
                         text += "\n";
-                        if (count(text, "\n") == 6) {
+                        if (count(text, "\n") == 5) {
                             isFull = true;
                             break;
                         }
@@ -239,72 +241,72 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.btn_0:
                 if (isNewNumber) {
-                    numbers.add(0L);
+                    numbers.add(BigInteger.valueOf(0));
                 } else {
-                    numbers.set(numbers.size() - 1, Long.parseLong(String.valueOf(numbers.get(numbers.size() - 1)) + "0"));
+                    numbers.set(numbers.size() - 1, BigInteger.valueOf(Long.parseLong(numbers.get(numbers.size() - 1) + "0")));
                 }
                 break;
             case R.id.btn_1:
                 if (isNewNumber) {
-                    numbers.add(1L);
+                    numbers.add(BigInteger.valueOf(1));
                 } else {
-                    numbers.set(numbers.size() - 1, Long.parseLong(String.valueOf(numbers.get(numbers.size() - 1)) + "1"));
+                    numbers.set(numbers.size() - 1, BigInteger.valueOf(Long.parseLong(numbers.get(numbers.size() - 1) + "1")));
                 }
                 break;
             case R.id.btn_2:
                 if (isNewNumber) {
-                    numbers.add(2L);
+                    numbers.add(BigInteger.valueOf(2));
                 } else {
-                    numbers.set(numbers.size() - 1, Long.parseLong(String.valueOf(numbers.get(numbers.size() - 1)) + "2"));
+                    numbers.set(numbers.size() - 1, BigInteger.valueOf(Long.parseLong(numbers.get(numbers.size() - 1) + "2")));
                 }
                 break;
             case R.id.btn_3:
                 if (isNewNumber) {
-                    numbers.add(3L);
+                    numbers.add(BigInteger.valueOf(3));
                 } else {
-                    numbers.set(numbers.size() - 1, Long.parseLong(String.valueOf(numbers.get(numbers.size() - 1)) + "3"));
+                    numbers.set(numbers.size() - 1, BigInteger.valueOf(Long.parseLong(numbers.get(numbers.size() - 1) + "3")));
                 }
                 break;
             case R.id.btn_4:
                 if (isNewNumber) {
-                    numbers.add(4L);
+                    numbers.add(BigInteger.valueOf(4));
                 } else {
-                    numbers.set(numbers.size() - 1, Long.parseLong(String.valueOf(numbers.get(numbers.size() - 1)) + "4"));
+                    numbers.set(numbers.size() - 1, BigInteger.valueOf(Long.parseLong(numbers.get(numbers.size() - 1) + "4")));
                 }
                 break;
             case R.id.btn_5:
                 if (isNewNumber) {
-                    numbers.add(5L);
+                    numbers.add(BigInteger.valueOf(5));
                 } else {
-                    numbers.set(numbers.size() - 1, Long.parseLong(String.valueOf(numbers.get(numbers.size() - 1)) + "5"));
+                    numbers.set(numbers.size() - 1, BigInteger.valueOf(Long.parseLong(numbers.get(numbers.size() - 1) + "5")));
                 }
                 break;
             case R.id.btn_6:
                 if (isNewNumber) {
-                    numbers.add(6L);
+                    numbers.add(BigInteger.valueOf(6));
                 } else {
-                    numbers.set(numbers.size() - 1, Long.parseLong(String.valueOf(numbers.get(numbers.size() - 1)) + "6"));
+                    numbers.set(numbers.size() - 1, BigInteger.valueOf(Long.parseLong(numbers.get(numbers.size() - 1) + "6")));
                 }
                 break;
             case R.id.btn_7:
                 if (isNewNumber) {
-                    numbers.add(7L);
+                    numbers.add(BigInteger.valueOf(7));
                 } else {
-                    numbers.set(numbers.size() - 1, Long.parseLong(String.valueOf(numbers.get(numbers.size() - 1)) + "7"));
+                    numbers.set(numbers.size() - 1, BigInteger.valueOf(Long.parseLong(numbers.get(numbers.size() - 1) + "7")));
                 }
                 break;
             case R.id.btn_8:
                 if (isNewNumber) {
-                    numbers.add(8L);
+                    numbers.add(BigInteger.valueOf(8));
                 } else {
-                    numbers.set(numbers.size() - 1, Long.parseLong(String.valueOf(numbers.get(numbers.size() - 1)) + "8"));
+                    numbers.set(numbers.size() - 1, BigInteger.valueOf(Long.parseLong(numbers.get(numbers.size() - 1) + "8")));
                 }
                 break;
             case R.id.btn_9:
                 if (isNewNumber) {
-                    numbers.add(9L);
+                    numbers.add(BigInteger.valueOf(9));
                 } else {
-                    numbers.set(numbers.size() - 1, Long.parseLong(String.valueOf(numbers.get(numbers.size() - 1)) + "9"));
+                    numbers.set(numbers.size() - 1, BigInteger.valueOf(Long.parseLong(numbers.get(numbers.size() - 1) + "9")));
                 }
                 break;
 
@@ -337,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
                             numbers.remove(numbers.size() - 1);
                             isNewNumber = true;
                         } else {
-                            numbers.set(numbers.size() - 1, Long.valueOf(numbers.get(numbers.size() - 1).toString().substring(0, numbers.get(numbers.size() - 1).toString().length() - 1)));
+                            numbers.set(numbers.size() - 1, BigInteger.valueOf(Long.parseLong(numbers.get(numbers.size() - 1).toString().substring(0, numbers.get(numbers.size() - 1).toString().length() - 1))));
                         }
                     } else {
                         operations.remove(operations.size() - 1);
@@ -345,17 +347,24 @@ public class MainActivity extends AppCompatActivity {
                     text_output.setText(getAnswerFullText());
                     result.setText(getAnswer(result));
                 }
+                isFull = false;
                 break;
         }
     }
 
     public void addOperationCLick(View view) {
-        if(isOperation()){
-            return;
+        if(numbers.size() == 0){
+            numbers.add(BigInteger.valueOf(0));
         }
+
 
         switch (view.getId()) {
             case R.id.plus:
+                if(isOperation()){
+                    operations.set(operations.size()-1, "+");
+                    text_output.setText(getAnswerFullText());
+                    return;
+                }
                 if (isFull) {
                     return;
                 }
@@ -363,6 +372,11 @@ public class MainActivity extends AppCompatActivity {
                 text_output.setText(getAnswerFullText());
                 break;
             case R.id.minus:
+                if(isOperation()){
+                    operations.set(operations.size()-1, "-");
+                    text_output.setText(getAnswerFullText());
+                    return;
+                }
                 if (isFull) {
                     return;
                 }
@@ -370,6 +384,11 @@ public class MainActivity extends AppCompatActivity {
                 text_output.setText(getAnswerFullText());
                 break;
             case R.id.ymno:
+                if(isOperation()){
+                    operations.set(operations.size()-1, "×");
+                    text_output.setText(getAnswerFullText());
+                    return;
+                }
                 if (isFull) {
                     return;
                 }
@@ -377,6 +396,11 @@ public class MainActivity extends AppCompatActivity {
                 text_output.setText(getAnswerFullText());
                 break;
             case R.id.delenye:
+                if(isOperation()){
+                    operations.set(operations.size()-1, "÷");
+                    text_output.setText(getAnswerFullText());
+                    return;
+                }
                 if (isFull) {
                     return;
                 }
@@ -392,5 +416,12 @@ public class MainActivity extends AppCompatActivity {
         text_output.setTextSize(20);
         result.setTextSize(50);
         result.setText(answer);
+    }
+
+    public void onDotClick(View view) {
+        if(isNewNumber){
+            return;
+        }
+
     }
 }
