@@ -23,4 +23,21 @@
         <item name="backgroundTint">@color/dark_gray</item>
     </style>
 
+
+    <style name="secondButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_height">70dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/worksans</item>
+        <item name="textAllCaps">false</item>
+        <item name="iconGravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="iconSize">30dp</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="cornerRadius">30dp</item>
+        <item name="iconTint">@color/black</item>
+        <item name="icon">@drawable/ic_baseline_arrow_right</item>
+        <item name="backgroundTint">@color/white</item>
+    </style>
+
 </resources>

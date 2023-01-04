@@ -7,7 +7,19 @@
     tools:context=".MainActivity"
     android:background="@color/black">
 
-
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/custom_btn"
+        android:onClick="openNewActivity"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:cornerRadius="@dimen/margin_between_btn"
+        android:layout_marginTop="@dimen/margin_between_btn"
+        android:backgroundTint="@color/blue"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/str_equal"
+        app:layout_constraintEnd_toEndOf="@+id/text_output"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/result"
@@ -20,7 +32,7 @@
         android:gravity="end"
         android:textSize="30sp"
         android:layout_marginEnd="38dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin_between_btn"
         />
 
     <TextView
@@ -50,7 +62,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/margin_between_btn"
             android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
@@ -64,7 +76,7 @@
                 android:id="@+id/plus_or_minus"
                 style="@style/Gray.Button"
                 android:enabled="false"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="@dimen/margin_between_btn"
                 app:icon="@drawable/icon_plus_minus"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp" />
@@ -74,7 +86,7 @@
                 style="@style/Gray.Button"
                 android:enabled="false"
                 android:textColor="@color/dark_gray"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/margin_between_btn"
                 android:text="@string/str_percent" />
 
             <com.google.android.material.button.MaterialButton
@@ -88,7 +100,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/margin_between_btn"
             android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
@@ -100,14 +112,14 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_8"
                 style="@style/Dark.Gray.Button"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="@dimen/margin_between_btn"
                 android:onClick="onNumberClick"
                 android:text="@string/str_8" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_9"
                 style="@style/Dark.Gray.Button"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/margin_between_btn"
 
                 android:onClick="onNumberClick"
                 android:text="@string/str_9" />
@@ -123,7 +135,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/margin_between_btn"
             android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
@@ -135,14 +147,14 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_5"
                 style="@style/Dark.Gray.Button"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="@dimen/margin_between_btn"
                 android:onClick="onNumberClick"
                 android:text="@string/str_5" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_6"
                 style="@style/Dark.Gray.Button"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/margin_between_btn"
                 android:onClick="onNumberClick"
                 android:text="@string/str_6" />
 
@@ -157,7 +169,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/margin_between_btn"
             android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
@@ -169,14 +181,14 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_2"
                 style="@style/Dark.Gray.Button"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="@dimen/margin_between_btn"
                 android:onClick="onNumberClick"
                 android:text="@string/str_2" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_3"
                 style="@style/Dark.Gray.Button"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/margin_between_btn"
                 android:onClick="onNumberClick"
                 android:text="@string/str_3" />
 
@@ -191,7 +203,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/margin_between_btn"
             android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
@@ -205,14 +217,14 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_0"
                 style="@style/Dark.Gray.Button"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="@dimen/margin_between_btn"
                 android:onClick="onNumberClick"
                 android:text="@string/str_0" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/delete"
                 style="@style/Dark.Gray.Button"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/margin_between_btn"
                 android:onClick="onClearClick"
                 app:icon="@drawable/icon_delete"
                 app:iconGravity="textStart"

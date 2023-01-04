@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         return String.valueOf(stack.pop());
     }
 
-    public static String getAnswer(View view) {
+    public static String getAnswer() {
         if (numbers.size() > 0) {
             String answer;
             if(numbers.size() == operations.size()){
@@ -197,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -207,11 +210,13 @@ public class MainActivity extends AppCompatActivity {
         operations = new ArrayList<>();
         isFull = false;
         isNewNumber = true;
+        findViewById(R.id.custom_btn).setVisibility(View.GONE);
 
 
     }
 
     public void onNumberClick(View view) {
+        findViewById(R.id.custom_btn).setVisibility(View.GONE);
         result.setVisibility(View.VISIBLE);
         if (text_output.length() < 9) {
             text_output.setTextSize(60);
@@ -224,9 +229,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        if (text_output.getText().toString().equals("0")) {
-            text_output.setText("");
-        }
 
         if (numbers.size() > 0 && !isNewNumber) {
             if (numbers.get(numbers.size() - 1).toString().length() == 14) {
@@ -313,15 +315,17 @@ public class MainActivity extends AppCompatActivity {
         }
         isNewNumber = false;
         text_output.setText(getAnswerFullText());
-        result.setText(getAnswer(result));
+        result.setText(getAnswer());
     }
 
     public void onClearClick(View view) {
+        findViewById(R.id.custom_btn).setVisibility(View.GONE);
         switch (view.getId()) {
             case R.id.clear:
                 text_output.setTextSize(60);
                 result.setTextSize(30);
                 isNewNumber = true;
+                isFull = false;
                 text_output.setText("0");
                 numbers.clear();
                 operations.clear();
@@ -345,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
                         operations.remove(operations.size() - 1);
                     }
                     text_output.setText(getAnswerFullText());
-                    result.setText(getAnswer(result));
+                    result.setText(getAnswer());
                 }
                 isFull = false;
                 break;
@@ -353,6 +357,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addOperationCLick(View view) {
+        findViewById(R.id.custom_btn).setVisibility(View.GONE);
         if(numbers.size() == 0){
             numbers.add(BigInteger.valueOf(0));
         }
@@ -412,7 +417,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showResultClick(View view) {
-        String answer = getAnswer(view);
+        findViewById(R.id.custom_btn).setVisibility(View.VISIBLE);
+        String answer = getAnswer();
         text_output.setTextSize(20);
         result.setTextSize(50);
         result.setText(answer);
@@ -423,5 +429,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+    }
+
+    public void openNewActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+        intent.putExtra("answer", getAnswer());
+        MainActivity.this.startActivity(intent);
     }
 }

@@ -18,4 +18,9 @@
     <string name="str_plus">+</string>
     <string name="str_equal">=</string>
     <string name="str_dot">.</string>
+    <string name="str_policies">Policies</string>
+    <string name="policy">Policy</string>
+    <string name="product_category">Product Category</string>
+    <string name="origin_country">Origin Country</string>
+    <string name="brand">Brand</string>
 </resources>

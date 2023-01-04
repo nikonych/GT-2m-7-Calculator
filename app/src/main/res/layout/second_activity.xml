@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/gray"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/menu"
+            android:tint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginHorizontal="80dp"
+            android:backgroundTint="@color/gray"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_baseline_fireplace" />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/gray"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_baseline_search" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/worksans"
+        android:text="@string/str_policies"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_between_btn"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/secondButton"
+            android:layout_width="match_parent"
+            android:text="@string/policy" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/secondButton"
+            android:layout_width="match_parent"
+            android:text="@string/product_category" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/secondButton"
+            android:layout_width="match_parent"
+            android:text="@string/origin_country" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/secondButton"
+            android:layout_width="match_parent"
+            android:text="@string/brand" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/answer_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/worksans"
+        android:layout_marginTop="@dimen/margin_between_btn"
+        android:text="Current Policies"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/clear_all_btn"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="@dimen/margin_between_btn"
+        android:backgroundTint="@color/white_red"
+        android:text="Export as CSV"
+        android:textAllCaps="false"
+        app:cornerRadius="15dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/worksans"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answer_second" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
